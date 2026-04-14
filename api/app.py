@@ -22,8 +22,12 @@ import pandas as pd
 from src.predict import load_pipeline, predict_single, predict_batch
 
 # ─── App Setup ──────────────────────────────────────────────────────────────────
-# Default folders: templates for HTML, static for CSS/JS
-app = Flask(__name__)
+# Ensure paths are absolute for serverless compatibility
+base_dir = os.path.dirname(os.path.abspath(__file__))
+template_dir = os.path.join(base_dir, 'templates')
+static_dir = os.path.join(base_dir, 'static')
+
+app = Flask(__name__, template_folder=template_dir, static_folder=static_dir)
 
 # ─── CORS (allow dashboard to call the API) ─────────────────────────────────────
 @app.after_request
