@@ -122,8 +122,8 @@ def preprocess_customer(raw: dict, feature_cols: list,
         if col not in df.columns:
             df[col] = 0
 
-    # Keep only training columns in correct order
-    df = df[feature_cols]
+    # Keep only training columns in correct order, and force numeric types
+    df = df[feature_cols].apply(pd.to_numeric, errors='coerce').fillna(0)
 
     # Scale numeric columns
     scale_present = [c for c in scale_cols if c in df.columns]
@@ -219,7 +219,7 @@ def predict_batch(model, scaler, feature_cols: list,
     for col in feature_cols:
         if col not in X.columns:
             X[col] = 0
-    X = X[feature_cols]
+    X = X[feature_cols].apply(pd.to_numeric, errors='coerce').fillna(0)
 
     # Scale
     scale_present = [c for c in SCALE_COLS if c in X.columns]
