@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Customer Churn Prediction Dashboard — Score customers in real-time using XGBoost ML model">
+    <meta name="description"
+        content="Customer Churn Prediction Dashboard â€” Score customers in real-time using XGBoost ML model">
     <title>Churn Prediction Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <!-- Animated Background -->
     <div class="bg-gradient"></div>
@@ -25,13 +29,14 @@
             <div class="header-left">
                 <div class="logo">
                     <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-                        <circle cx="16" cy="16" r="14" stroke="url(#grad1)" stroke-width="2.5"/>
-                        <path d="M10 18 L14 12 L18 16 L22 10" stroke="url(#grad1)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                        <circle cx="22" cy="10" r="2.5" fill="#a78bfa"/>
+                        <circle cx="16" cy="16" r="14" stroke="url(#grad1)" stroke-width="2.5" />
+                        <path d="M10 18 L14 12 L18 16 L22 10" stroke="url(#grad1)" stroke-width="2.5"
+                            stroke-linecap="round" stroke-linejoin="round" fill="none" />
+                        <circle cx="22" cy="10" r="2.5" fill="#a78bfa" />
                         <defs>
                             <linearGradient id="grad1" x1="0" y1="0" x2="32" y2="32">
-                                <stop offset="0%" stop-color="#818cf8"/>
-                                <stop offset="100%" stop-color="#c084fc"/>
+                                <stop offset="0%" stop-color="#818cf8" />
+                                <stop offset="100%" stop-color="#c084fc" />
                             </linearGradient>
                         </defs>
                     </svg>
@@ -44,10 +49,14 @@
             <div class="header-right">
                 <div id="api-status" class="status-badge status-checking">
                     <span class="status-dot"></span>
-                    <span class="status-text">Checking API…</span>
+                    <span class="status-text">Checking APIâ€¦</span>
                 </div>
                 <div class="model-badge" id="model-badge" style="display:none">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                        <path d="M2 17l10 5 10-5" />
+                        <path d="M2 12l10 5 10-5" />
+                    </svg>
                     <span id="model-type">XGBClassifier</span>
                 </div>
             </div>
@@ -56,11 +65,19 @@
         <!-- Tab Navigation -->
         <nav class="tabs">
             <button class="tab active" data-tab="single" id="tab-single">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                </svg>
                 Single Customer
             </button>
             <button class="tab" data-tab="batch" id="tab-batch">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                </svg>
                 Batch Scoring
             </button>
         </nav>
@@ -78,7 +95,11 @@
                         <!-- Demographics -->
                         <fieldset class="fieldset">
                             <legend>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                                    <circle cx="12" cy="7" r="4" />
+                                </svg>
                                 Demographics
                             </legend>
                             <div class="form-row">
@@ -118,7 +139,11 @@
                         <!-- Account Info -->
                         <fieldset class="fieldset">
                             <legend>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                                    <path d="M2 10h20" />
+                                </svg>
                                 Account Information
                             </legend>
                             <div class="form-row">
@@ -158,7 +183,11 @@
                         <!-- Services -->
                         <fieldset class="fieldset">
                             <legend>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M9 9h6v6H9z"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="4" y="4" width="16" height="16" rx="2" />
+                                    <path d="M9 9h6v6H9z" />
+                                </svg>
                                 Services
                             </legend>
                             <div class="form-row">
@@ -248,23 +277,32 @@
                         <!-- Charges -->
                         <fieldset class="fieldset">
                             <legend>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23" />
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                </svg>
                                 Charges
                             </legend>
                             <div class="form-row">
                                 <div class="form-group">
                                     <label for="MonthlyCharges">Monthly Charges ($)</label>
-                                    <input type="number" id="MonthlyCharges" name="MonthlyCharges" min="0" max="200" step="0.01" value="70.50" required>
+                                    <input type="number" id="MonthlyCharges" name="MonthlyCharges" min="0" max="200"
+                                        step="0.01" value="70.50" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="TotalCharges">Total Charges ($)</label>
-                                    <input type="number" id="TotalCharges" name="TotalCharges" min="0" max="10000" step="0.01" value="846.00" required>
+                                    <input type="number" id="TotalCharges" name="TotalCharges" min="0" max="10000"
+                                        step="0.01" value="846.00" required>
                                 </div>
                             </div>
                         </fieldset>
 
                         <button type="submit" class="btn btn-primary" id="btn-predict">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
                             Predict Churn Risk
                         </button>
                     </form>
@@ -275,8 +313,11 @@
                     <!-- Placeholder -->
                     <div id="results-placeholder" class="card results-placeholder">
                         <div class="placeholder-icon">
-                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.3">
-                                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="1.5" opacity="0.3">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                                <path d="M2 17l10 5 10-5" />
+                                <path d="M2 12l10 5 10-5" />
                             </svg>
                         </div>
                         <h3>No Prediction Yet</h3>
@@ -291,30 +332,41 @@
                                 <svg viewBox="0 0 200 120" class="gauge-svg">
                                     <defs>
                                         <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" stop-color="#22c55e"/>
-                                            <stop offset="50%" stop-color="#eab308"/>
-                                            <stop offset="100%" stop-color="#ef4444"/>
+                                            <stop offset="0%" stop-color="#22c55e" />
+                                            <stop offset="50%" stop-color="#eab308" />
+                                            <stop offset="100%" stop-color="#ef4444" />
                                         </linearGradient>
                                     </defs>
-                                    <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="12" stroke-linecap="round"/>
-                                    <path id="gauge-arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round" stroke-dasharray="0 251.33" class="gauge-arc"/>
-                                    <text id="gauge-value" x="100" y="85" text-anchor="middle" class="gauge-value">0%</text>
-                                    <text id="gauge-label" x="100" y="110" text-anchor="middle" class="gauge-label">—</text>
+                                    <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="rgba(255,255,255,0.08)"
+                                        stroke-width="12" stroke-linecap="round" />
+                                    <path id="gauge-arc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none"
+                                        stroke="url(#gaugeGrad)" stroke-width="12" stroke-linecap="round"
+                                        stroke-dasharray="0 251.33" class="gauge-arc" />
+                                    <text id="gauge-value" x="100" y="85" text-anchor="middle"
+                                        class="gauge-value">0%</text>
+                                    <text id="gauge-label" x="100" y="110" text-anchor="middle"
+                                        class="gauge-label">â€”</text>
                                 </svg>
                             </div>
                             <div class="gauge-footer">
                                 <div class="risk-badge" id="risk-badge">
                                     <span class="risk-dot"></span>
-                                    <span id="risk-text">—</span>
+                                    <span id="risk-text">â€”</span>
                                 </div>
-                                <span class="latency" id="latency-value">—</span>
+                                <span class="latency" id="latency-value">â€”</span>
                             </div>
                         </div>
 
                         <!-- Risk Factors -->
                         <div class="card card-factors">
                             <h3>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path
+                                        d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                                    <line x1="12" y1="9" x2="12" y2="13" />
+                                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                                </svg>
                                 Top Risk Factors
                             </h3>
                             <div id="factors-list" class="factors-list">
@@ -325,7 +377,13 @@
                         <!-- Prediction Details -->
                         <div class="card card-details">
                             <h3>
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                    <polyline points="14 2 14 8 20 8" />
+                                    <line x1="16" y1="13" x2="8" y2="13" />
+                                    <line x1="16" y1="17" x2="8" y2="17" />
+                                </svg>
                                 Prediction Details
                             </h3>
                             <div class="details-grid" id="details-grid"></div>
@@ -346,13 +404,14 @@
                     </div>
 
                     <div class="upload-zone" id="upload-zone">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
-                            <polyline points="17 8 12 3 7 8"/>
-                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                            <polyline points="17 8 12 3 7 8" />
+                            <line x1="12" y1="3" x2="12" y2="15" />
                         </svg>
                         <p><strong>Drop a JSON file here</strong> or click to browse</p>
-                        <span class="upload-hint">Array of customer objects • Max 10,000 records</span>
+                        <span class="upload-hint">Array of customer objects â€¢ Max 10,000 records</span>
                         <input type="file" id="file-input" accept=".json" hidden>
                     </div>
 
@@ -365,11 +424,18 @@
 
                     <div class="batch-actions">
                         <button class="btn btn-secondary" id="btn-load-sample" type="button">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                            </svg>
                             Load Sample Data
                         </button>
                         <button class="btn btn-primary" id="btn-batch-predict" type="button">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg>
                             Score All Customers
                         </button>
                     </div>
@@ -409,7 +475,12 @@
                         <div class="table-header">
                             <h3>Scored Customers</h3>
                             <button class="btn btn-sm" id="btn-export" type="button">
-                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                    <polyline points="7 10 12 15 17 10" />
+                                    <line x1="12" y1="15" x2="12" y2="3" />
+                                </svg>
                                 Export CSV
                             </button>
                         </div>
@@ -435,6 +506,7 @@
     <!-- Toast container -->
     <div id="toast-container" class="toast-container"></div>
 
-    <script src="{{ url_for('static', filename='app.js') }}"></script>
+    <script src="app.js"></script>
 </body>
+
 </html>
