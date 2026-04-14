@@ -60,6 +60,9 @@ def load_model_once():
         logger.error(f"✗ Failed to load model: {e}")
         logger.error("Run `python src/train.py` first to train and save the model.")
 
+# Call immediately when module is loaded by Gunicorn/Flask
+load_model_once()
+
 # ─── Decorators ─────────────────────────────────────────────────────────────────
 def require_model(f):
     """Return 503 if model hasn't been loaded."""
@@ -199,7 +202,6 @@ def not_found(e):
 
 # ─── Entry Point ────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
-    load_model_once()
     # Default port set to 5000 as requested for local dev/Render
     port = int(os.environ.get("PORT", 5000))
     debug = os.environ.get("FLASK_DEBUG", "false").lower() == "true"
