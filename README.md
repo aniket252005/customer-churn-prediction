@@ -48,10 +48,12 @@ customer-churn-prediction/
 
 ## 🛠️ Technology Stack
 
-*   **Frontend**: HTML5, Vanilla JavaScript, CSS3 (Custom Design System)
-*   **Backend API**: Python, Flask, Gunicorn
-*   **Machine Learning**: XGBoost, Scikit-Learn, Pandas, NumPy
-*   **Deployment**: Railway
+*   **Languages & Core**: Python, SQL, JavaScript (Vanilla), HTML5, CSS3
+*   **Data Science Libs**: Pandas, NumPy, Matplotlib, Seaborn
+*   **Machine Learning**: XGBoost, Scikit-Learn (Logistic Regression, Random Forest)
+*   **Backend & Framework**: Flask, Gunicorn
+*   **Version Control & Deployment**: GitHub, Railway
+*   **Analytics & BI**: Power BI
 
 ---
 
