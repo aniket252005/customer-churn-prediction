@@ -25,23 +25,31 @@ The repository is modular and structured following software engineering best pra
 
 ```text
 customer-churn-prediction/
-├── api/                         # Flask Backend
-│   ├── app.py                   # Main Flask application and API routes
+├── api/                         # Flask Backend & Dashboard UI
 │   ├── static/                  # Dashboard assets (CSS, JS)
-│   └── templates/               # Dashboard UI (HTML)
-├── models/                      # Serialized ML Artifacts (Pickle files)
-│   ├── xgb_model.pkl            # Final trained XGBoost model
-│   └── scaler.pkl               # Data standard scaler
-├── notebooks/                   # Jupyter Notebooks for experimentation
+│   ├── templates/               # Dashboard HTML
+│   └── app.py                   # Main Flask REST API
+├── dashboard/                   # Business Intelligence
+│   └── churn_dashboard.pbix     # Power BI interactive dashboard
+├── models/                      # Serialized ML Artifacts
+│   ├── lr_model.pkl             # Logistic Regression Model
+│   ├── rf_model.pkl             # Random Forest Model
+│   ├── xgb_model.pkl            # XGBoost Model (Production)
+│   ├── scaler.pkl               # Data standard scaler
+│   └── X_train.pkl, etc.        # Train/Test splits
+├── notebooks/                   # Jupyter Notebooks for EDA & Prototyping
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
-│   └── ...
+│   ├── 03_feature_engineering.ipynb
+│   └── 04_modeling_evaluation.ipynb
 ├── src/                         # Machine Learning Pipeline source code
-│   ├── preprocess.py            # Data cleaning logic
-│   ├── features.py              # Feature engineering
-│   ├── train.py                 # Model training workflow
-│   └── predict.py               # Inference and loading logic
-├── Procfile                     # Deployment profile for Railway
+│   ├── evaluate.py              # Model evaluation metrics
+│   ├── features.py              # Feature engineering logic
+│   ├── predict.py               # Inference and model loading
+│   ├── preprocess.py            # Data cleaning rules
+│   └── train.py                 # Model training workflow
+├── .gitignore                   # Git exclusion rules
+├── Procfile                     # Railway deployment configuration
 ├── requirements.txt             # Python dependencies
 └── runtime.txt                  # Python runtime definition (3.11)
 ```
