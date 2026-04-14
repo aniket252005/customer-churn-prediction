@@ -1,0 +1,32 @@
+# Environments
+venv/
+.env
+.venv/
+env/
+ENV/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Jupyter
+.ipynb_checkpoints/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Data & Models (optional, but good to keep data out of Git)
+data/
+outputs/
+models/*.json
+!models/feature_cols.json
