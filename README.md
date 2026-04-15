@@ -31,17 +31,29 @@ customer-churn-prediction/
 │   └── app.py                   # Main Flask REST API
 ├── dashboard/                   # Business Intelligence
 │   └── churn_dashboard.pbix     # Power BI interactive dashboard
+│── data/                        # Datasets
+│    ├── WA_Fn-UseC_-Telco-Customer-Churn.csv
+│    ├── clean_df.csv            
+│    └── churn_predictions.csv   
 ├── models/                      # Serialized ML Artifacts
 │   ├── lr_model.pkl             # Logistic Regression Model
+│   ├── X_test.pkl               # Test split
+│   ├── y_test                   # Test split
 │   ├── rf_model.pkl             # Random Forest Model
 │   ├── xgb_model.pkl            # XGBoost Model (Production)
 │   ├── scaler.pkl               # Data standard scaler
-│   └── X_train.pkl, etc.        # Train/Test splits
+│   ├── X_train.pkl              # Train split
+│   └── y_train.pkl              # Train spli
 ├── notebooks/                   # Jupyter Notebooks for EDA & Prototyping
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
 │   ├── 03_feature_engineering.ipynb
 │   └── 04_modeling_evaluation.ipynb
+├── outputs/                     # Outputs & Business Insights
+│   ├── eda_plots/
+│   ├── business_insights.md
+│   ├── model_comparison.csv
+│   └── model_comparison.png
 ├── src/                         # Machine Learning Pipeline source code
 │   ├── evaluate.py              # Model evaluation metrics
 │   ├── features.py              # Feature engineering logic
