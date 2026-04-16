@@ -269,32 +269,6 @@ python api/app.py
 # → http://127.0.0.1:5000
 ```
 
----
-
-## 📋 Interview Q&A
-
-<details>
-<summary>Top 5 questions a recruiter will ask about this project</summary>
-
-**Q: Why XGBoost over Random Forest?**
-XGBoost uses sequential gradient boosting — each tree corrects the residual errors of the previous. RF averages parallel trees. In practice, XGBoost gives better bias reduction and has `scale_pos_weight` for native imbalance handling (set to 2.77 here). Both achieved identical Recall (0.8021) but XGBoost had marginally higher AUC and faster inference.
-
-**Q: How did you handle class imbalance?**
-Three-layer approach: (1) stratified train/test split to preserve 73/27 ratio in both sets, (2) `class_weight='balanced'` in LR and RF, (3) `scale_pos_weight=2.77` in XGBoost — ratio of negative to positive class samples. Optimized for Recall, not Accuracy, because a model that always predicts "no churn" gets 73.5% accuracy but catches zero churners.
-
-**Q: What is data leakage and how did you prevent it?**
-Leakage is when test set information influences training, causing inflated evaluation metrics. Prevented by fitting `StandardScaler` only on `X_train`, then calling `.transform()` on both. Also flagged `TotalCharges` as a proxy feature — mathematically derived from tenure × MonthlyCharges — not an independent signal.
-
-**Q: What does SHAP show here?**
-SHAP assigns each feature a directional contribution per individual prediction. For a high-risk customer, it might show: `Contract_Month-to-month → +0.41`, `tenure=1 → +0.38`, `TechSupport_No → +0.21`. This lets a retention agent see exactly why someone is flagged and address the specific driver — a discount for high charges, or a support offer for the tech support gap.
-
-**Q: What would you improve with more time?**
-(1) SMOTE oversampling to generate synthetic minority samples and improve Precision without sacrificing Recall. (2) Push AUC above 0.86 threshold via deeper GridSearchCV on `max_depth`, `subsample`, `colsample_bytree`. (3) Survival analysis — if monthly snapshots exist, Cox proportional hazards predicts *when* a customer will churn, not just *if*. (4) A/B test the model's retention recommendations to measure real-world churn reduction.
-
-</details>
-
----
-
 ## 📄 License
 
 MIT License — free to use, modify, and distribute with attribution.
