@@ -32,9 +32,9 @@ customer-churn-prediction/
 ├── dashboard/                   # Business Intelligence
 │   └── churn_dashboard.pbix     # Power BI interactive dashboard
 │── data/                        # Datasets
-│    ├── WA_Fn-UseC_-Telco-Customer-Churn.csv
-│    ├── clean_df.csv            
-│    └── churn_predictions.csv   
+│    ├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset
+│    ├── clean_df.csv                           # Clean dataset
+│    └── churn_predictions.csv                  # Model output for dashboard
 ├── models/                      # Serialized ML Artifacts
 │   ├── lr_model.pkl             # Logistic Regression Model
 │   ├── X_test.pkl               # Test split
@@ -43,7 +43,7 @@ customer-churn-prediction/
 │   ├── xgb_model.pkl            # XGBoost Model (Production)
 │   ├── scaler.pkl               # Data standard scaler
 │   ├── X_train.pkl              # Train split
-│   └── y_train.pkl              # Train spli
+│   └── y_train.pkl              # Train split
 ├── notebooks/                   # Jupyter Notebooks for EDA & Prototyping
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
