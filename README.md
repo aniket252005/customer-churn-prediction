@@ -228,13 +228,12 @@ customer-churn-prediction/
 
 | Layer | Tools |
 |---|---|
-| Data & EDA | Python, Pandas, NumPy, Matplotlib, Seaborn |
-| Machine Learning | scikit-learn, XGBoost, SHAP |
-| Hyperparameter Tuning | GridSearchCV (5-fold stratified CV) |
-| Serialization | joblib |
-| API & Deployment | Flask, Gunicorn, Railway |
-| Business Intelligence | Power BI |
-| Version Control | Git, GitHub |
+| Languages & Core | Python, SQL, JavaScript (Vanilla), HTML5, CSS3 |
+| Data Science Libs | Pandas, NumPy, Matplotlib, Seaborn |
+| Machine Learning | XGBoost, Scikit-Learn (Logistic Regression, Random Forest) |
+| Backend & Framework | Flask, Gunicorn |
+| Version Control & Deployment | GitHub, Railway |
+| Analytics & BI | Power BI |
 
 ---
 
