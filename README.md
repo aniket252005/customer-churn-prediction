@@ -8,6 +8,19 @@
 [![Power BI](https://img.shields.io/badge/BI-Power_BI-F2C811?style=for-the-badge&logo=powerbi)](https://powerbi.microsoft.com/)
 
 ---
+A professional, end-to-end Machine Learning solution for predicting customer churn. This project provides a **real-time Flask REST API** backed by an **XGBoost classification model**, packaged with a highly interactive, responsive web dashboard for business users.
+
+*🚀 **Live Demo**: [https://web-production-c6a31.up.railway.app/](https://web-production-c6a31.up.railway.app/)*
+
+---
+
+## 🌟 Key Features
+
+*   ⚡ **Real-time Scoring**: Get instant churn predictions along with percentage probabilities.
+*   📦 **Batch Prediction processing**: Score thousands of customers at once by uploading a JSON or CSV array.
+*   🔍 **Model Interpretability**: Provides the top driving risk factors for every prediction using data from SHAP.
+*   🎨 **Interactive Dashboard**: A sleek, modern user interface built using vanilla HTML/CSS/JS with smooth animations and dynamic SVGs.
+*   ☁️ **Cloud Native**: Fully containerized and optimized for deployment on Serverless or ephemeral platforms l
 
 ## 🎯 Problem Statement
 
