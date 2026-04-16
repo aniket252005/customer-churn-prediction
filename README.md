@@ -1,153 +1,290 @@
-# 📊 Customer Churn Prediction API & Dashboard
+# 📉 Customer Churn Prediction
+### End-to-End ML System · XGBoost · SHAP · Power BI · Flask API · Deployed on Railway
 
 [![Live Demo](https://img.shields.io/badge/Live_Demo-View_Project-2ea44f?style=for-the-badge&logo=vercel)](https://web-production-c6a31.up.railway.app/)
-[![Python Version](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)](https://www.python.org/)
-[![Framework](https://img.shields.io/badge/Framework-Flask-black?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
-[![ML Library](https://img.shields.io/badge/ML-XGBoost-orange?style=for-the-badge&logo=xgboost)](https://xgboost.readthedocs.io/)
-
-A professional, end-to-end Machine Learning solution for predicting customer churn. This project provides a **real-time Flask REST API** backed by an **XGBoost classification model**, packaged with a highly interactive, responsive web dashboard for business users.
-
-*🚀 **Live Demo**: [https://web-production-c6a31.up.railway.app/](https://web-production-c6a31.up.railway.app/)*
+[![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)](https://www.python.org/)
+[![XGBoost](https://img.shields.io/badge/ML-XGBoost-orange?style=for-the-badge&logo=xgboost)](https://xgboost.readthedocs.io/)
+[![Flask](https://img.shields.io/badge/Framework-Flask-black?style=for-the-badge&logo=flask)](https://flask.palletsprojects.com/)
+[![Power BI](https://img.shields.io/badge/BI-Power_BI-F2C811?style=for-the-badge&logo=powerbi)](https://powerbi.microsoft.com/)
 
 ---
 
-## 🌟 Key Features
+## 🎯 Problem Statement
 
-*   ⚡ **Real-time Scoring**: Get instant churn predictions along with percentage probabilities.
-*   📦 **Batch Prediction processing**: Score thousands of customers at once by uploading a JSON or CSV array.
-*   🔍 **Model Interpretability**: Provides the top driving risk factors for every prediction using data from SHAP.
-*   🎨 **Interactive Dashboard**: A sleek, modern user interface built using vanilla HTML/CSS/JS with smooth animations and dynamic SVGs.
-*   ☁️ **Cloud Native**: Fully containerized and optimized for deployment on Serverless or ephemeral platforms like Railway and Render.
-
-## 🏗️ Project Structure
-
-The repository is modular and structured following software engineering best practices:
-
-```text
-customer-churn-prediction/
-├── api/                         # Flask Backend & Dashboard UI
-│   ├── static/                  # Dashboard assets (CSS, JS)
-│   ├── templates/               # Dashboard HTML
-│   └── app.py                   # Main Flask REST API
-├── dashboard/                   # Business Intelligence
-│   └── churn_dashboard.pbix     # Power BI interactive dashboard
-│── data/                        # Datasets
-│    ├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset
-│    ├── clean_df.csv                           # Clean dataset
-│    └── churn_predictions.csv                  # Model output for dashboard
-├── models/                      # Serialized ML Artifacts
-│   ├── lr_model.pkl             # Logistic Regression Model
-│   ├── X_test.pkl               # Test split
-│   ├── y_test                   # Test split
-│   ├── rf_model.pkl             # Random Forest Model
-│   ├── xgb_model.pkl            # XGBoost Model (Production)
-│   ├── scaler.pkl               # Data standard scaler
-│   ├── X_train.pkl              # Train split
-│   └── y_train.pkl              # Train split
-├── notebooks/                   # Jupyter Notebooks for EDA & Prototyping
-│   ├── 01_data_cleaning.ipynb
-│   ├── 02_eda.ipynb
-│   ├── 03_feature_engineering.ipynb
-│   └── 04_modeling_evaluation.ipynb
-├── outputs/                     # Outputs & Business Insights
-│   ├── eda_plots/
-│   ├── business_insights.md
-│   ├── model_comparison.csv
-│   └── model_comparison.png
-├── src/                         # Machine Learning Pipeline source code
-│   ├── evaluate.py              # Model evaluation metrics
-│   ├── features.py              # Feature engineering logic
-│   ├── predict.py               # Inference and model loading
-│   ├── preprocess.py            # Data cleaning rules
-│   └── train.py                 # Model training workflow
-├── .gitignore                   # Git exclusion rules
-├── Procfile                     # Railway deployment configuration
-├── requirements.txt             # Python dependencies
-└── runtime.txt                  # Python runtime definition (3.11)
-```
-
-## 🛠️ Technology Stack
-
-*   **Languages & Core**: Python, SQL, JavaScript (Vanilla), HTML5, CSS3
-*   **Data Science Libs**: Pandas, NumPy, Matplotlib, Seaborn
-*   **Machine Learning**: XGBoost, Scikit-Learn (Logistic Regression, Random Forest)
-*   **Backend & Framework**: Flask, Gunicorn
-*   **Version Control & Deployment**: GitHub, Railway
-*   **Analytics & BI**: Power BI
+Telecom companies lose **26.5% of customers annually** to churn — each lost customer represents $500–$2,000+ in lifetime value. This project builds a **production-grade ML system** on 7,043 IBM Telco records to identify which customers are at risk of cancelling, enabling a retention team to intervene proactively before revenue is lost.
 
 ---
 
-## 🚦 Quick Start (Local Development)
+## 📊 Key Results
 
-Want to run the API and Dashboard on your own machine? Follow these steps:
+| Model | AUC-ROC | Recall | Precision | F1 |
+|---|---|---|---|---|
+| **XGBoost** *(production)* | **0.8469** | **0.8021** | 0.5172 | 0.6289 |
+| Random Forest | 0.8429 | 0.8021 | 0.5119 | 0.6250 |
+| Logistic Regression *(baseline)* | 0.8465 | 0.7727 | 0.5097 | 0.6142 |
 
-**1. Clone the repository**
-```bash
-git clone https://github.com/aniket252005/customer-churn-prediction.git
-cd customer-churn-prediction
-```
+**XGBoost was selected for production** — highest AUC and Recall tied with RF, but with faster inference and native class imbalance handling via `scale_pos_weight`.
 
-**2. Create a virtual environment**
-```bash
-python -m venv venv
-# Windows:
-.\venv\Scripts\Activate.ps1
-# macOS/Linux:
-source venv/bin/activate
-```
-
-**3. Install dependencies**
-```bash
-pip install -r requirements.txt
-```
-
-**4. Start the Application**
-```bash
-python api/app.py
-```
-
-*The dashboard will be available at: [http://127.0.0.1:5000/](http://127.0.0.1:5000/)*
+> **Why Recall over Accuracy?** Missing a churner (false negative) costs the company ~$1,500 in LTV. Incorrectly flagging a loyal customer (false positive) costs only ~$30 in a retention offer. Recall-first metric design reflects this 50× cost asymmetry.
 
 ---
 
-## 📡 API Reference
+## 🖥️ Power BI Dashboard
 
-If you prefer to bypass the UI, you can call the API directly using REST.
+![Executive KPI Dashboard](outputs/dashboard_screenshots/page1_executive_kpi.png)
+*Page 1 — Executive KPI Overview: 7,043 customers · 26.54% churn rate · Revenue at risk by contract type*
 
-### 1. Health Check
-`GET /health`
-Returns the status of the model and the server.
+![Segment Analysis](outputs/dashboard_screenshots/page2_segment_analysis.png)
+*Page 2 — Segment Analysis: Churn rate by internet service, payment method, senior citizen status, tech support*
 
-### 2. Predict Single Customer
-`POST /predict`
-Score a single customer's data in real-time.
+![High Risk Action List](outputs/dashboard_screenshots/page3_action_list.png)
+*Page 3 — High-Risk Customer Action List: Ranked by churn probability for targeted retention outreach*
 
-**Request Body (JSON):**
-```json
+---
+
+## 💡 Top Business Insights
+
+| # | Finding | Impact |
+|---|---|---|
+| 1 | Month-to-month customers churn at **15× the rate** of two-year contract customers (42.7% vs 2.8%) | Highest-priority retention lever |
+| 2 | Customers in their **first 12 months** churn at 48% — nearly double the overall rate | Onboarding is the critical window |
+| 3 | Fiber optic internet users churn at **2.2× the rate** of DSL users (41.9% vs 19.0%) | Pricing/value mismatch signal |
+| 4 | Electronic check users churn at **45.3%** vs ~16% for auto-pay methods | Payment friction drives exit |
+| 5 | Customers without tech support churn at **41.6%** vs 15.2% with support | Support services are a retention tool |
+
+---
+
+## 🔍 EDA Highlights
+
+<details>
+<summary>View EDA Plots (9 charts)</summary>
+
+### Churn Distribution
+![Churn Distribution](outputs/eda_plots/churn_distribution.png)
+
+### Churn Rate by Contract Type
+![Contract Type](outputs/eda_plots/churn_contract.png)
+
+### Tenure Distribution by Churn
+![Tenure](outputs/eda_plots/churn_tenure.png)
+
+### Churn by Tenure Group
+![Tenure Group](outputs/eda_plots/churn_tenure_group.png)
+
+### Monthly Charges vs Churn
+![Monthly Charges](outputs/eda_plots/churn_monthly_charges.png)
+
+### Churn by Senior Citizen
+![Senior Citizen](outputs/eda_plots/churn_seniorcitizen.png)
+
+### Family Status (Partner & Dependents)
+![Family Status](outputs/eda_plots/churn_family_status.png)
+
+### Services & Payment Method
+![Services](outputs/eda_plots/churn_services_payment.png)
+
+### Correlation Heatmap
+![Correlation Heatmap](outputs/eda_plots/correlation_heatmap.png)
+
+</details>
+
+---
+
+## ⚙️ Feature Engineering
+
+10+ features engineered from raw 21-column dataset:
+
+| Feature | Logic | Business Rationale |
+|---|---|---|
+| `tenure_group` | Bin tenure into 0–12, 12–24, 24–48, 48–72 | Segments customers by loyalty stage |
+| `service_count` | Sum of all active services (0–8) | Engagement depth proxy |
+| `charges_per_month_ratio` | TotalCharges / tenure | Spend consistency signal |
+| `has_online_security` | Binary flag | Service stickiness |
+| `high_charges_flag` | MonthlyCharges > 75th percentile | Price sensitivity risk tier |
+| One-hot encoding | All categorical columns | Model-ready features |
+
+---
+
+## 🧠 Model Architecture
+
+```
+Raw CSV (21 cols)
+      ↓
+preprocess.py  →  Fix TotalCharges dtype, encode binary columns, drop CustomerID
+      ↓
+features.py    →  Engineer 10+ new features, one-hot encode categoricals
+      ↓
+train_test_split (80/20, stratified, random_state=42)
+      ↓
+StandardScaler  →  Fit on X_train only  →  Transform X_train + X_test
+      ↓
+┌────────────────┬──────────────────┬──────────────┐
+│ Logistic Reg.  │  Random Forest   │   XGBoost    │
+│ class_weight=  │ class_weight=    │ scale_pos_   │
+│ 'balanced'     │ 'balanced'       │ weight=2.77  │
+└────────────────┴──────────────────┴──────────────┘
+      ↓
+GridSearchCV (5-fold stratified CV) on XGBoost
+      ↓
+SHAP explainability → global beeswarm + per-customer waterfall
+      ↓
+joblib.dump → xgb_model.pkl + scaler.pkl
+      ↓
+Flask REST API → /predict (single) + /batch (multi) → Railway deployment
+```
+
+---
+
+## 🚀 Live API
+
+**Base URL:** `https://web-production-c6a31.up.railway.app/`
+
+### Single Customer Prediction
+
+```bash
+POST /predict
+Content-Type: application/json
+
 {
-  "tenure": 24,
-  "MonthlyCharges": 75.50,
-  "TotalCharges": 1812.00,
-  "Contract_One year": 1,
+  "tenure": 2,
+  "MonthlyCharges": 94.0,
+  "TotalCharges": 188.0,
+  "Contract_One year": 0,
   "Contract_Two year": 0,
   "InternetService_Fiber optic": 1
 }
 ```
 
-**Response:**
 ```json
 {
-  "PredictedChurn": 0,
-  "ChurnProbability": 0.28,
-  "RiskLevel": "Low",
-  "latency_ms": 12.5
+  "PredictedChurn": 1,
+  "ChurnProbability": 0.78,
+  "RiskLevel": "High",
+  "latency_ms": 11.2
 }
 ```
 
-## ☁️ Deployment
+### Batch Scoring
 
-This application is actively deployed on **Railway**.
-To deploy your own version:
-1. Connect your GitHub repository to Railway.
-2. The platform will automatically detect the `Procfile` and `requirements.txt`.
-3. Ensure the environment uses `PORT` (assigned automatically by Railway).
+```bash
+POST /batch
+Content-Type: application/json
+
+[{ ...customer_1 }, { ...customer_2 }, ...]
+```
+
+Returns churn probability + risk level for up to 10,000 records.
+
+---
+
+## 🏗️ Project Structure
+
+```
+customer-churn-prediction/
+├── api/                          # Flask Backend + Dashboard UI
+│   ├── static/                   # CSS, JS assets
+│   ├── templates/                # Dashboard HTML
+│   └── app.py                    # REST API endpoints
+├── dashboard/
+│   └── churn_dashboard.pbix      # Power BI (3-page BI dashboard)
+├── data/
+│   ├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset
+│   └── churn_predictions.csv                   # Model output for dashboard
+├── models/
+│   ├── xgb_model.pkl             # XGBoost (production)
+│   ├── rf_model.pkl              # Random Forest
+│   ├── lr_model.pkl              # Logistic Regression (baseline)
+│   └── scaler.pkl                # StandardScaler (fit on train only)
+├── notebooks/
+│   ├── 01_data_cleaning.ipynb
+│   ├── 02_eda.ipynb
+│   ├── 03_feature_engineering.ipynb
+│   └── 04_modeling_evaluation.ipynb
+├── outputs/
+│   ├── eda_plots/                # 9 EDA charts
+│   ├── dashboard_screenshots/    # Power BI screenshots
+│   ├── model_comparison.csv      # AUC, Recall, F1 for all 3 models
+│   ├── shap_beeswarm.png         # Global feature importance
+│   ├── shap_waterfall.png        # Per-customer explanation
+│   └── business_insights.md      # 5 quantified business findings
+├── src/
+│   ├── preprocess.py             # Data cleaning pipeline
+│   ├── features.py               # Feature engineering
+│   ├── train.py                  # Model training workflow
+│   ├── evaluate.py               # Metrics + chart generation
+│   └── predict.py                # Inference + model loading
+├── .gitignore
+├── Procfile                      # Railway deployment config
+├── requirements.txt
+└── runtime.txt                   # Python 3.11
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Tools |
+|---|---|
+| Data & EDA | Python, Pandas, NumPy, Matplotlib, Seaborn |
+| Machine Learning | scikit-learn, XGBoost, SHAP |
+| Hyperparameter Tuning | GridSearchCV (5-fold stratified CV) |
+| Serialization | joblib |
+| API & Deployment | Flask, Gunicorn, Railway |
+| Business Intelligence | Power BI |
+| Version Control | Git, GitHub |
+
+---
+
+## ⚡ Quick Start
+
+```bash
+# 1. Clone
+git clone https://github.com/aniket252005/customer-churn-prediction.git
+cd customer-churn-prediction
+
+# 2. Environment
+python -m venv venv
+source venv/bin/activate       # Windows: .\venv\Scripts\Activate.ps1
+
+# 3. Install
+pip install -r requirements.txt
+
+# 4. Run API locally
+python api/app.py
+# → http://127.0.0.1:5000
+```
+
+---
+
+## 📋 Interview Q&A
+
+<details>
+<summary>Top 5 questions a recruiter will ask about this project</summary>
+
+**Q: Why XGBoost over Random Forest?**
+XGBoost uses sequential gradient boosting — each tree corrects the residual errors of the previous. RF averages parallel trees. In practice, XGBoost gives better bias reduction and has `scale_pos_weight` for native imbalance handling (set to 2.77 here). Both achieved identical Recall (0.8021) but XGBoost had marginally higher AUC and faster inference.
+
+**Q: How did you handle class imbalance?**
+Three-layer approach: (1) stratified train/test split to preserve 73/27 ratio in both sets, (2) `class_weight='balanced'` in LR and RF, (3) `scale_pos_weight=2.77` in XGBoost — ratio of negative to positive class samples. Optimized for Recall, not Accuracy, because a model that always predicts "no churn" gets 73.5% accuracy but catches zero churners.
+
+**Q: What is data leakage and how did you prevent it?**
+Leakage is when test set information influences training, causing inflated evaluation metrics. Prevented by fitting `StandardScaler` only on `X_train`, then calling `.transform()` on both. Also flagged `TotalCharges` as a proxy feature — mathematically derived from tenure × MonthlyCharges — not an independent signal.
+
+**Q: What does SHAP show here?**
+SHAP assigns each feature a directional contribution per individual prediction. For a high-risk customer, it might show: `Contract_Month-to-month → +0.41`, `tenure=1 → +0.38`, `TechSupport_No → +0.21`. This lets a retention agent see exactly why someone is flagged and address the specific driver — a discount for high charges, or a support offer for the tech support gap.
+
+**Q: What would you improve with more time?**
+(1) SMOTE oversampling to generate synthetic minority samples and improve Precision without sacrificing Recall. (2) Push AUC above 0.86 threshold via deeper GridSearchCV on `max_depth`, `subsample`, `colsample_bytree`. (3) Survival analysis — if monthly snapshots exist, Cox proportional hazards predicts *when* a customer will churn, not just *if*. (4) A/B test the model's retention recommendations to measure real-world churn reduction.
+
+</details>
+
+---
+
+## 📄 License
+
+MIT License — free to use, modify, and distribute with attribution.
+
+---
+
+*Built with Python · scikit-learn · XGBoost · SHAP · Power BI · Flask · Railway*
+*IBM Telco Customer Churn Dataset — 7,043 records · 21 features*
