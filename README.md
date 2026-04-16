@@ -20,7 +20,7 @@ A professional, end-to-end Machine Learning solution for predicting customer chu
 *   📦 **Batch Prediction processing**: Score thousands of customers at once by uploading a JSON or CSV array.
 *   🔍 **Model Interpretability**: Provides the top driving risk factors for every prediction using data from SHAP.
 *   🎨 **Interactive Dashboard**: A sleek, modern user interface built using vanilla HTML/CSS/JS with smooth animations and dynamic SVGs.
-*   ☁️ **Cloud Native**: Fully containerized and optimized for deployment on Serverless or ephemeral platforms l
+*   ☁️ **Cloud Native**: Fully containerized and optimized for deployment on Serverless or ephemeral platforms like Railway
 
 ## 🎯 Problem Statement
 
