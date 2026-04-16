@@ -179,46 +179,49 @@ Returns churn probability + risk level for up to 10,000 records.
 
 ## 🏗️ Project Structure
 
-```
+```text
 customer-churn-prediction/
-├── api/                          # Flask Backend + Dashboard UI
-│   ├── static/                   # CSS, JS assets
-│   ├── templates/                # Dashboard HTML
-│   └── app.py                    # REST API endpoints
-├── dashboard/
-│   └── churn_dashboard.pbix      # Power BI (3-page BI dashboard)
-├── data/
-│   ├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset
-│   └── churn_predictions.csv                   # Model output for dashboard
-├── models/
-│   ├── xgb_model.pkl             # XGBoost (production)
-│   ├── rf_model.pkl              # Random Forest
-│   ├── lr_model.pkl              # Logistic Regression (baseline)
-│   └── scaler.pkl                # StandardScaler (fit on train only)
-├── notebooks/
+├── api/                         # Flask Backend & Dashboard UI
+│   ├── static/                  # Dashboard assets (CSS, JS)
+│   ├── templates/               # Dashboard HTML
+│   └── app.py                   # Main Flask REST API
+├── dashboard/                   # Business Intelligence
+│   └── churn_dashboard.pbix     # Power BI interactive dashboard
+│── data/                        # Datasets
+│    ├── WA_Fn-UseC_-Telco-Customer-Churn.csv   # Raw dataset
+│    ├── clean_df.csv                           # Clean dataset
+│    └── churn_predictions.csv                  # Model output for dashboard
+├── models/                      # Serialized ML Artifacts
+│   ├── lr_model.pkl             # Logistic Regression Model
+│   ├── X_test.pkl               # Test split
+│   ├── y_test                   # Test split
+│   ├── rf_model.pkl             # Random Forest Model
+│   ├── xgb_model.pkl            # XGBoost Model (Production)
+│   ├── scaler.pkl               # Data standard scaler
+│   ├── X_train.pkl              # Train split
+│   └── y_train.pkl              # Train split
+├── notebooks/                   # Jupyter Notebooks for EDA & Prototyping
 │   ├── 01_data_cleaning.ipynb
 │   ├── 02_eda.ipynb
 │   ├── 03_feature_engineering.ipynb
 │   └── 04_modeling_evaluation.ipynb
-├── outputs/
-│   ├── eda_plots/                # 9 EDA charts
-│   ├── dashboard_screenshots/    # Power BI screenshots
-│   ├── model_comparison.csv      # AUC, Recall, F1 for all 3 models
-│   ├── shap_beeswarm.png         # Global feature importance
-│   ├── shap_waterfall.png        # Per-customer explanation
-│   └── business_insights.md      # 5 quantified business findings
-├── src/
-│   ├── preprocess.py             # Data cleaning pipeline
-│   ├── features.py               # Feature engineering
-│   ├── train.py                  # Model training workflow
-│   ├── evaluate.py               # Metrics + chart generation
-│   └── predict.py                # Inference + model loading
-├── .gitignore
-├── Procfile                      # Railway deployment config
-├── requirements.txt
-└── runtime.txt                   # Python 3.11
+├── outputs/                     # Outputs & Business Insights
+│   ├── eda_plots/               # 9 EDA charts
+│   ├── dashboard_screenshot     # Power BI screenshots
+│   ├── business_insights.md     # 5 quantified business findings
+│   ├── model_comparison.csv     # AUC, Recall, F1 for all 3 models
+│   └── model_comparison.png     # roc curve
+├── src/                         # Machine Learning Pipeline source code
+│   ├── evaluate.py              # Model evaluation metrics
+│   ├── features.py              # Feature engineering logic
+│   ├── predict.py               # Inference and model loading
+│   ├── preprocess.py            # Data cleaning rules
+│   └── train.py                 # Model training workflow
+├── .gitignore                   # Git exclusion rules
+├── Procfile                     # Railway deployment configuration
+├── requirements.txt             # Python dependencies
+└── runtime.txt                  # Python runtime definition (3.11)
 ```
-
 ---
 
 ## 🛠️ Tech Stack
