@@ -45,7 +45,7 @@ Telecom companies lose **26.5% of customers annually** to churn — each lost cu
 ## 🖥️ Power BI Dashboard
 
 ![Executive KPI Dashboard](outputs/dashboard_screenshot/page1_executive_kpi.png)
-*Page 1 — Executive KPI Overview: 7,043 customers · 26.54% churn rate · Revenue at risk by contract type*
+*Page 1 — Executive KPI Overview: 7,043 customers · 26.54% churn rate · Churn  rate by contract type*
 
 ![Segment Analysis](outputs/dashboard_screenshot/page2_segment_analysis.png)
 *Page 2 — Segment Analysis: Churn rate by internet service, payment method, senior citizen status, tech support*
